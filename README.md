@@ -26,9 +26,9 @@ project-root/
 │   └── gaia-statefulset.yml
 │
 └── terraform/           # Terraform files for managing AWS resources
-    ├── main.tf
-    ├── variables.tf
-    ├── outputs.tf
+│    ├── main.tf
+│    ├── variables.tf
+│    ├── outputs.tf
 └── scripts/           # python cli for automating deployment actions
     ├── cli.py
     ├── utils.py
@@ -51,6 +51,8 @@ project-root/
 
    ```bash
    docker run gaia
+
+   # to run remote, simply do "docker run ajail/gaia:17.2.0"
    ```
 
 ### Applying Kubernetes Manifest Files

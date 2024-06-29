@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: gaia
+  labels:
+    app: gaia
+spec:
+  selector:
+    matchLabels:
+      app: gaia
+  serviceName: gaia
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gaia
+    spec:
+      containers:
+      - name: gaia
+        image: ajail/gaia:v17.2.0
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1"
+        ports:
+        - containerPort: 26656
+          name: p2p
+        - containerPort: 26657
+          name: rpc
+        - containerPort: 26660
+          name: metrics
+        volumeMounts:
+        - name: gaia-data
+          mountPath: /gaia/.gaia
+  volumeClaimTemplates:
+  - metadata:
+      name: gaia-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi
